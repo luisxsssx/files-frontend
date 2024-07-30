@@ -1,0 +1,5 @@
+<div class="container-lg m-2 p-2">
+  <ul *ngFor="let item of files">
+    <button class="btn btn-primary" (click)="navigate(item)">{{ item }}</button>
+  </ul>
+</div>
