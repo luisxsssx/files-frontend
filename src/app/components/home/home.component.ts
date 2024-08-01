@@ -1,13 +1,14 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { NgFor } from '@angular/common';
-import { File } from '../../../models/file';
 import { Router } from '@angular/router';
+import { SearchBarComponent } from "../search-bar/search-bar.component";
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, SearchBarComponent, MatIconModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

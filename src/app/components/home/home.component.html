@@ -1,5 +1,92 @@
-<div class="container-lg m-2 p-2">
-  <ul *ngFor="let item of files">
-    <button class="btn btn-primary" (click)="navigate(item)">{{ item }}</button>
-  </ul>
+<div class="container-fluid">
+  <div class="row flex-nowrap">
+    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 color">
+      <div
+        class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100"
+      >
+        <a
+          href="/"
+          class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-decoration-none"
+        >
+          <button class="btn btn-light fs-6 d-none d-sm-inline rounded-5">
+            <mat-icon>add</mat-icon>
+          </button>
+        </a>
+        <ul
+          class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+          id="menu"
+        >
+          <li class="nav-item">
+            <button href="#" class="nav-link align-middle px-0">
+              <i class="fs-4 bi-house"></i>
+              <span class="ms-1 d-none d-sm-inline">HomePage</span>
+            </button>
+          </li>
+          <li>
+            <a
+              href="#submenu3"
+              data-bs-toggle="collapse"
+              class="nav-link px-0 align-middle"
+            >
+              <i class="fs-4 bi-grid"></i>
+              <span class="ms-1 d-none d-sm-inline">My unit</span>
+            </a>
+            <ul
+              class="collapse nav flex-column ms-1"
+              id="submenu3"
+              data-bs-parent="#menu"
+            >
+              <li class="w-100">
+                <a href="#" class="nav-link px-0">
+                  <span class="d-none d-sm-inline">Product</span> 1</a
+                >
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <a href="#" class="nav-link px-0 align-middle">
+              <i class="fs-4 bi-table"></i>
+              <span class="ms-1 d-none d-sm-inline">Paper bin</span></a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col py-3">
+      <h3 class="text-center">Welcome</h3>
+      <app-search-bar />
+      <div class="container-lg m-2 p-4">
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-outline-primary rounded-start-2">
+            <mat-icon>description</mat-icon>
+            Files
+          </button>
+          <button type="button" class="btn btn-outline-primary rounded-end-2">
+            <mat-icon>folder</mat-icon>
+            Folders
+          </button>
+        </div>
+
+        <div class="my-4">
+          <p>Name</p>
+          <hr />
+        </div>
+
+        <div class="m-1 p-0">
+          <ul class="list-unstyled">
+            <li *ngFor="let item of files" class="mb-2">
+              <button
+                class="btn"
+                data-bs-toggle="button"
+                (click)="navigate(item)"
+              >
+                {{ item }}
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

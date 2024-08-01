@@ -35,6 +35,4 @@ export class FolderContentComponent implements OnInit {
     );
   }
 
-
-
 }
