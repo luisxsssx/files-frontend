@@ -75,22 +75,28 @@
         </div>
 
         <div class="my-4">
-          <p>Name</p>
-          <hr />
-        </div>
-
-        <div class="m-1 p-0">
-          <ul class="list-unstyled">
-            <li *ngFor="let item of files" class="mb-2">
-              <button
-                class="btn"
-                data-bs-toggle="button"
-                (click)="navigate(item)"
-              >
-                {{ item }}
-              </button>
-            </li>
-          </ul>
+          <div class="table-responsive my-4">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th class="col">Modification Date</th>
+                  <th class="col">Size</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of files">
+                  <td>
+                    <button class="btn" data-bs-toggle="button">
+                      {{ item.name }}
+                    </button>
+                  </td>
+                  <td>{{ item.modificationDate }}</td>
+                  <td>{{ item.size }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

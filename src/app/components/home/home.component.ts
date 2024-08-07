@@ -4,7 +4,7 @@ import { NgClass, NgFor } from '@angular/common';
 import { Router } from '@angular/router';
 import { SearchBarComponent } from "../search-bar/search-bar.component";
 import { MatIconModule } from '@angular/material/icon';
-import { Folder } from '../../../models/file';
+import { File, Folder } from '../../../models/file';
 import { error } from 'console';
 
 @Component({
@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
 
   isNavbarCollapse = true;
   folders: Folder[] = [];
-  files: string[] = [];
+  files: File[] = [];
   path: string = '';
   firstClick = true;
 
