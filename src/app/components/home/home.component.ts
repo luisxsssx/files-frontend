@@ -1,19 +1,22 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { NgClass, NgFor } from '@angular/common';
-import { Router } from '@angular/router';
-import { SearchBarComponent } from "../search-bar/search-bar.component";
+import { Router } from '@angular/router';;
 import { MatIconModule } from '@angular/material/icon';
 import { File, Folder } from '../../../models/file';
-import { error } from 'console';
+import { UnitComponent } from "../../layout/unit/unit.component";
+import { SearchBarComponent } from "../../layout/search-bar/search-bar.component";
+import { SidebarComponent } from "../../layout/sidebar/sidebar.component";
+import { FolderContentComponent } from "../folder-content/folder-content.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor, SearchBarComponent, MatIconModule, NgClass],
+  imports: [NgFor, SearchBarComponent, MatIconModule, NgClass, UnitComponent, SidebarComponent, FolderContentComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent implements OnInit {
 
   isNavbarCollapse = true;
@@ -25,55 +28,20 @@ export class HomeComponent implements OnInit {
   constructor(private service: ApiService, private router: Router) { }
 
   ngOnInit(): void {
-    this.loadBaseFolderContent();
+
   }
 
-  toggleSidebar(): void {
-    this.isNavbarCollapse = !this.isNavbarCollapse;
-    if (!this.isNavbarCollapse) {
-      if (this.firstClick) {
-        this.loadFolders(this.path, true);
-        this.firstClick = false;
-      } else {
-        this.loadFolders(this.path, false);
-      }
-    }
-  }
-
-  loadFolders(path: string = '', inmediate: boolean = false): void {
-    if (inmediate) {
-      this.service.getFolders(path).subscribe(
-        data => {
-          this.folders = data;
-          console.log('Folders:', this.folders);
-        },
-        error => {
-          console.log('Error getting folders', error);
-        }
-      );
-    } else {
-      setTimeout(() => {
-        this.service.getFolders(path).subscribe(
-          data => {
-            this.folders = data;
-            console.log('Folders:', this.folders);
-          },
-          error => {
-            console.log('Error getting folders', error);
-          }
-        );
-      }, 2000);
-    }
-  }
-
-  loadBaseFolderContent(): void {
-    this.service.getBaseFolderContent().subscribe(
+  // Load files
+  loadFiles(path: string = '') {
+    this.service.getFiles(path).subscribe(
       data => {
-        console.log('Files:', data);
         this.files = data;
+        console.log('Files: ', this.files);
       },
-      error => console.error('Error loading base folder content', error)
-    );
+      error => {
+        console.log('Error getting folders', error);
+      }
+    )
   }
 
   navigate(path: string): void {

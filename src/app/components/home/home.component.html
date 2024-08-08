@@ -4,101 +4,13 @@
       <div
         class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100"
       >
-        <a
-          href="/"
-          class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-decoration-none"
-        >
-          <button class="btn btn-light fs-6 d-none d-sm-inline rounded-5">
-            <mat-icon>add</mat-icon>
-          </button>
-        </a>
-        <ul
-          class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
-          id="menu"
-        >
-          <li class="nav-item">
-            <button href="#" class="nav-link align-middle px-0">
-              <i class="fs-4 bi-house"></i>
-              <span class="ms-1 d-none d-sm-inline">HomePage</span>
-            </button>
-          </li>
-          <li>
-            <a
-              (click)="toggleSidebar()"
-              [attr.aria-expanded]="!isNavbarCollapse"
-              class="nav-link px-0 align-middle"
-            >
-              <i class="fs-4 bi-grid"></i>
-              <span class="ms-1 d-none d-sm-inline no-selected">My unit</span>
-            </a>
-            <div
-              [ngClass]="{
-                collapse: isNavbarCollapse,
-                'navbar-collapse': true
-              }"
-            >
-              <ul
-                class="nav flex-column ms-1"
-                id="submenu3"
-                data-bs-parent="#menu"
-              >
-                <li class="w-100" *ngFor="let folder of folders">
-                  <a href="#" class="nav-link px-0">
-                    <span class="d-none d-sm-inline">{{ folder.name }}</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li>
-            <a href="#" class="nav-link px-0 align-middle">
-              <i class="fs-4 bi-table"></i>
-              <span class="ms-1 d-none d-sm-inline">Paper bin</span></a
-            >
-          </li>
-        </ul>
+        <app-sidebar />
       </div>
     </div>
     <div class="col py-3">
       <h1 class="text-center shakeFix">Welcome</h1>
       <app-search-bar />
-      <div class="container-lg m-2 p-4">
-        <div class="btn-group" role="group">
-          <button type="button" class="btn btn-outline-primary rounded-start-2">
-            <mat-icon>description</mat-icon>
-            Files
-          </button>
-          <button type="button" class="btn btn-outline-primary rounded-end-2">
-            <mat-icon>folder</mat-icon>
-            Folders
-          </button>
-        </div>
-
-        <div class="my-4">
-          <div class="table-responsive my-4">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">Name</th>
-                  <th class="col">Modification Date</th>
-                  <th class="col">Size</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let item of files">
-                  <td>
-                    <button class="btn" data-bs-toggle="button">
-                      {{ item.name }}
-                    </button>
-                  </td>
-                  <td>{{ item.modificationDate }}</td>
-                  <td>{{ item.size }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+      <app-unit />
     </div>
   </div>
 </div>

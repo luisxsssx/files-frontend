@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { endpoints } from '../../models/api';
 import { Observable } from 'rxjs';
-import { Folder } from '../../models/file';
+import { File, Folder } from '../../models/file';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +23,11 @@ export class ApiService {
   // Filter folders
   getFolders(path: string = ''): Observable<Folder[]> {
     return this.http.get<Folder[]>(endpoints.content.getFolders(path));
+  }
+
+  // Filter folders
+  getFiles(path: string = ''): Observable<File[]> {
+    return this.http.get<File[]>(endpoints.content.getFiles(path));
   }
 
 }
