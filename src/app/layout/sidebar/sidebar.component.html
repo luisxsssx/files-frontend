@@ -2,29 +2,32 @@
   href="/"
   class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-decoration-none"
 >
-  <button class="btn btn-light fs-6 d-none d-sm-inline rounded-5">
-    <mat-icon>add</mat-icon>
-  </button>
 </a>
 <ul
   class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
   id="menu"
 >
+  <li>
+    <button class="btn btn-ligth border">
+      <a href="/"><mat-icon>add</mat-icon></a>
+    </button>
+  </li>
   <li class="nav-item">
-    <button href="#" class="nav-link align-middle px-0">
-      <i class="fs-4 bi-house"></i>
-      <span class="ms-1 d-none d-sm-inline">HomePage</span>
+    <button
+      type="button"
+      class="nav-link align-middle px-0 btn btn-primary btn-lg round"
+    >
+      HomePage
     </button>
   </li>
   <li>
-    <a
+    <button
       (click)="toggleSidebar()"
       [attr.aria-expanded]="!isNavbarCollapse"
-      class="nav-link px-0 align-middle"
+      class="nav-link px-0 align-middle no-selected px-0 btn btn-primary"
     >
-      <i class="fs-4 bi-grid"></i>
-      <span class="ms-1 d-none d-sm-inline no-selected">My unit</span>
-    </a>
+      My unit
+    </button>
     <div
       [ngClass]="{
         collapse: isNavbarCollapse,
@@ -33,17 +36,16 @@
     >
       <ul class="nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
         <li class="w-100" *ngFor="let folder of folders">
-          <a href="#" class="nav-link px-0">
-            <span class="d-none d-sm-inline">{{ folder.name }}</span>
-          </a>
+          <button href="#" class="nav-link px-0">
+            {{ folder.name }}
+          </button>
         </li>
       </ul>
     </div>
   </li>
   <li>
-    <a href="#" class="nav-link px-0 align-middle">
-      <i class="fs-4 bi-table"></i>
-      <span class="ms-1 d-none d-sm-inline">Paper bin</span></a
-    >
+    <button class="nav-link px-0 align-middle btn btn-primary">
+      Paper bin
+    </button>
   </li>
 </ul>
