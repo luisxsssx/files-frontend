@@ -17,7 +17,6 @@ export class UnitComponent implements OnInit {
 
   show: 'files' | 'folder' | null = null;
   items: (File | Folder)[] = [];
-  //folders: Folder[] = [];
   files: File[] = [];
 
   constructor(private service: ApiService, private router: Router) { }

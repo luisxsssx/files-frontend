@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
-import { File, Folder } from '../../../models/file';
 import { MatIconModule } from '@angular/material/icon';
 import { NgFor } from '@angular/common';
-import { SidebarComponent } from "../../layout/sidebar/sidebar.component";
-import { SearchBarComponent } from "../../layout/search-bar/search-bar.component";
+import { Title } from '@angular/platform-browser';
+import { SidebarComponent } from '../../../layout/sidebar/sidebar.component';
+import { SearchBarComponent } from '../../../layout/search-bar/search-bar.component';
+import { ApiService } from '../../../services/api.service';
+import { Folder } from '../../../../models/file';
 
 
 @Component({
@@ -20,10 +21,10 @@ export class MyUnitComponent implements OnInit {
   folder: Folder[] = [];
   files: File[] = [];
 
-  constructor(private service: ApiService, private route: Router) { }
+  constructor(private service: ApiService, private route: Router, private tittle: Title) { }
 
   ngOnInit(): void {
-
+    this.tittle.setTitle('My unit - Home Cloud');
   }
 
   loadRootContent(): void {

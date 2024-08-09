@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { File, Folder } from '../../../models/file';
 import { ApiService } from '../../services/api.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NgClass, NgFor } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [NgClass, NgFor, MatIconModule],
+  imports: [NgClass, NgFor, MatIconModule, RouterLink],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })

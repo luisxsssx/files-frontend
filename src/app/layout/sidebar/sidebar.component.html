@@ -1,51 +1,58 @@
-<a
-  href="/"
-  class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-decoration-none"
->
-</a>
 <ul
   class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
-  id="menu"
 >
   <li>
-    <button class="btn btn-ligth border">
-      <a href="/"><mat-icon>add</mat-icon></a>
+    <button class="btn btn-ligth btn-lg">
+      <a class="navbar-brand d-flex align-items-center">
+        <img src="plus.svg" class="svg2 me-2" />
+        <span class="navbar-text">Add</span>
+      </a>
     </button>
   </li>
-  <li class="nav-item">
-    <button
-      type="button"
-      class="nav-link align-middle px-0 btn btn-primary btn-lg round"
+  <br />
+  <li>
+    <a
+      class="navbar-brand d-flex align-items-center rounded-4"
+      [routerLink]="['']"
     >
-      HomePage
-    </button>
+      <img src="house.svg" class="svg3 me-2" />
+      <span class="navbar-text">HomePage</span>
+    </a>
   </li>
   <li>
-    <button
+    <a
+      class="navbar-brand d-flex align-items-center rounded-4"
       (click)="toggleSidebar()"
       [attr.aria-expanded]="!isNavbarCollapse"
-      class="nav-link px-0 align-middle no-selected px-0 btn btn-primary"
+      [routerLink]="['/my-unit']"
     >
-      My unit
-    </button>
+      <img src="disk.svg" class="svg3 me-2" />
+      <span class="navbar-text">My unit</span>
+    </a>
     <div
       [ngClass]="{
         collapse: isNavbarCollapse,
         'navbar-collapse': true
       }"
+      class="container-md"
     >
       <ul class="nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
         <li class="w-100" *ngFor="let folder of folders">
-          <button href="#" class="nav-link px-0">
-            {{ folder.name }}
-          </button>
+          <a class="navbar-brand d-flex align-items-center rounded-4">
+            <img src="folder.svg" class="svg3 me-2" />
+            <span class="navbar-text">{{ folder.name }}</span>
+          </a>
         </li>
       </ul>
     </div>
   </li>
   <li>
-    <button class="nav-link px-0 align-middle btn btn-primary">
-      Paper bin
-    </button>
+    <a
+      class="navbar-brand d-flex align-items-center rounded-4"
+      [routerLink]="['/paperbin']"
+    >
+      <img src="trash.svg" class="svg3 me-2" />
+      <span class="navbar-text">Paper bin</span>
+    </a>
   </li>
 </ul>

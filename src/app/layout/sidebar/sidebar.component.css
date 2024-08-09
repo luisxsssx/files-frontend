@@ -1,0 +1,28 @@
+.svg2 {
+    height: 30px;
+}
+
+.svg3 {
+    width: 30px;
+    height: 18px;
+}
+
+.navbar-text {
+    margin-top: 4px;
+}
+
+.r {
+    height: 70px;
+    width: 120px;
+    border: 50vh;
+}
+
+a {
+    cursor: pointer;
+    height: 4vh;
+    width: 29vh;
+}
+
+a:hover {
+    background-color: #8ecae6;
+}

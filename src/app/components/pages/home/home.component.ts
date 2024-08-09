@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api.service';
+import { ApiService } from '../../../services/api.service';
 import { NgClass, NgFor } from '@angular/common';
 import { Router } from '@angular/router';;
 import { MatIconModule } from '@angular/material/icon';
-import { File, Folder } from '../../../models/file';
-import { UnitComponent } from "../../layout/unit/unit.component";
-import { SearchBarComponent } from "../../layout/search-bar/search-bar.component";
-import { SidebarComponent } from "../../layout/sidebar/sidebar.component";
-import { FolderContentComponent } from "../folder-content/folder-content.component";
+import { File, Folder } from '../../../../models/file';
+import { UnitComponent } from "../../../layout/unit/unit.component";
+import { SearchBarComponent } from "../../../layout/search-bar/search-bar.component";
+import { SidebarComponent } from "../../../layout/sidebar/sidebar.component";
+import { FolderContentComponent } from "../../folder-content/folder-content.component";
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -25,10 +26,10 @@ export class HomeComponent implements OnInit {
   path: string = '';
   firstClick = true;
 
-  constructor(private service: ApiService, private router: Router) { }
+  constructor(private service: ApiService, private router: Router, private title: Title) { }
 
   ngOnInit(): void {
-
+    this.title.setTitle('Home Cloud');
   }
 
   // Load files
