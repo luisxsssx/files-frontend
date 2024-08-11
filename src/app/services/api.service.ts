@@ -11,8 +11,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  getBaseFolderContent(): Observable<any[]> {
-    return this.http.get<any[]>(endpoints.content.getContent);
+  getBaseFolderContent(): Observable<File[]> {
+    return this.http.get<File[]>(endpoints.content.getContent);
   }
 
   getFolderContent(path: string): Observable<string[]> {

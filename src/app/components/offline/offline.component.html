@@ -1,11 +1,17 @@
-<div *ngIf="!isOnline" class="alert alert-danger text-center" role="alert">
-  You do not have an internet connection!
+<div
+  *ngIf="!isOnline"
+  class="alert alert-danger text-center align-items-center"
+  role="alert"
+>
+  <img src="warning.svg" />
+  <span class="navbar-text me-2">You do not have an internet connection!</span>
 </div>
 
 <div
   *ngIf="showOnlineMessage"
-  class="alert alert-success text-center"
+  class="alert alert-success text-center align-items-center"
   role="alert"
 >
-  Internet connection reestablished!
+  <img src="ok.svg" />
+  <span class="navbar-text me-2">Internet connection reestablished!</span>
 </div>

@@ -29,7 +29,6 @@ export class UnitComponent implements OnInit {
     return (item as File).size !== undefined;
   }
 
-
   loadBaseFolderContent(): void {
     this.service.getBaseFolderContent().subscribe(
       data => {

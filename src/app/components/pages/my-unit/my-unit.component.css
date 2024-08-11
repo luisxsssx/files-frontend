@@ -2,3 +2,26 @@
     background-color: #e9ecef;
     color: #212529;
 }
+
+.svg {
+    height: 20px;
+}
+
+.hover-column td:last-child {
+    width: 150px;
+    padding-right: 10px;
+    text-align: right;
+}
+
+.icon {
+    display: none;
+    padding: 0 5px;
+}
+
+.hover-column:hover .icon {
+    display: inline-block;
+}
+
+.col {
+    cursor: pointer;
+}
