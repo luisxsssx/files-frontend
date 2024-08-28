@@ -1,10 +1,10 @@
 export interface File {
     name: string;
     size: string;
-    modificationDate: Date;
+    creationDate: Date;
 }
 
 export interface Folder {
     name: string;
-    modificationDate: Date;
+    creationDate: Date;
 }

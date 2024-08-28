@@ -7,11 +7,13 @@ import { SidebarComponent } from '../../../layout/sidebar/sidebar.component';
 import { SearchBarComponent } from '../../../layout/search-bar/search-bar.component';
 import { ApiService } from '../../../services/api.service';
 import { File, Folder } from '../../../../models/file';
+import { AddElementComponent } from "../../add-file/add-file.component";
+import { AddFolderComponent } from "../../add-folder/add-folder.component";
 
 @Component({
   selector: 'app-my-unit',
   standalone: true,
-  imports: [MatIconModule, NgFor, NgIf, SidebarComponent, SearchBarComponent],
+  imports: [MatIconModule, NgFor, NgIf, SidebarComponent, SearchBarComponent, AddElementComponent, AddFolderComponent],
   templateUrl: './my-unit.component.html',
   styleUrl: './my-unit.component.css'
 })

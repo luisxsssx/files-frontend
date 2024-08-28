@@ -9,5 +9,5 @@ export const routes: Routes = [
     { path: '', component: HomeComponent, pathMatch: 'full' },
     { path: 'my-unit', component: MyUnitComponent },
     { path: 'paperbin', component: PaperbinComponent },
-    { path: 'content/:path', component: FolderContentComponent },
+    { path: 'content', component: FolderContentComponent },
 ];

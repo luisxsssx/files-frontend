@@ -1,20 +1,20 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { File, Folder } from '../../../models/file';
-import { ApiService } from '../../services/api.service';
+import { File, Folder } from '../../../../models/file';
+import { ApiService } from '../../../services/api.service';
 import { Router } from '@angular/router';
-
+import { AddElementComponent } from "../../add-file/add-file.component";
+import { AddFolderComponent } from "../../add-folder/add-folder.component";
 
 @Component({
   selector: 'app-unit',
   standalone: true,
-  imports: [MatIconModule, NgFor, NgClass, NgIf],
+  imports: [MatIconModule, NgFor, NgClass, NgIf, AddElementComponent, AddFolderComponent],
   templateUrl: './unit.component.html',
   styleUrl: './unit.component.css'
 })
 export class UnitComponent implements OnInit {
-
   show: 'files' | 'folder' | null = null;
   items: (File | Folder)[] = [];
   files: File[] = [];
@@ -22,7 +22,7 @@ export class UnitComponent implements OnInit {
   constructor(private service: ApiService, private router: Router) { }
 
   ngOnInit(): void {
-    //this.loadBaseFolderContent();
+    this.loadFiles();
   }
 
   itemHasSize(item: File | Folder): item is File {

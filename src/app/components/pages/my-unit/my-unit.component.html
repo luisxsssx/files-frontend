@@ -17,9 +17,9 @@
               <thead>
                 <tr>
                   <th scope="col">Name</th>
-                  <th class="col">Modification Date</th>
+                  <th class="col">Creation Date</th>
                   <th class="col">Size</th>
-                  <th></th>
+                  <th><app-add-element/><app-add-folder/></th>
                 </tr>
               </thead>
               <tbody>
@@ -37,7 +37,7 @@
                     />
                     <span>{{ item.name }}</span>
                   </td>
-                  <td>{{ item.modificationDate }}</td>
+                  <td>{{ item.creationDate }}</td>
                   <td>{{ itemHasSize(item) ? item.size : "-" }}</td>
                   <td>
                     <img src="download.svg" class="svg me-1 icon" />

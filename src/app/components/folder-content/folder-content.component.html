@@ -1,5 +1,55 @@
-<div class="container-lg m-2 p-2">
-  <ul>
-    <li *ngFor="let item of files">{{ item }}</li>
-  </ul>
+<div class="container-fluid no-selected">
+  <div class="row flex-nowrap">
+    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 color">
+      <div
+        class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100"
+      >
+        <app-sidebar />
+      </div>
+    </div>
+    <div class="col py-3">
+      <h3 class="text-center">My Unit</h3>
+      <app-search-bar />
+      <div class="container-lg m-2 p-4">
+        <div class="my-4">
+          <div class="table-responsive my-4">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th class="col">Creation Date</th>
+                  <th class="col">Size</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr  class="hover-column">
+                  <td class="navbar-brand d-flex align-items-center">
+                    <img
+                     
+                      src="files.svg"
+                      class="svg me-2"
+                    />
+                    <img
+                    
+                      src="folder.svg"
+                      class="svg me-2"
+                    />
+                    <span></span>
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <img src="download.svg" class="svg me-1 icon" />
+                    <img src="rename.svg" class="svg me-1 icon" />
+                    <img src="trash.svg" class="svg icon" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,0 +1,60 @@
+<div class="container-lg m-2 p-4">
+  <div class="btn-group" role="group">
+    <button
+      type="button"
+      class="btn btn-outline-secondary rounded-start-2"
+      (click)="loadFiles()"
+    >
+      <img src="files.svg" class="svg" />
+
+      Files
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-secondary rounded-end-2"
+      (click)="loadFolders()"
+    >
+      <img src="folder.svg" class="svg" />
+      Folders
+    </button>
+  </div>
+
+  <div class="my-4">
+    <div class="table-responsive my-4">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th class="col">Creation Date</th>
+            <th class="col" *ngIf="show === 'files'">Size</th>
+            <th><app-add-element/> <app-add-folder/></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items" class="hover-column">
+            <td class="navbar-brand d-flex align-items-center">
+              <img *ngIf="itemHasSize(item)" src="files.svg" class="svg me-2" />
+              <img
+                *ngIf="!itemHasSize(item)"
+                src="folder.svg"
+                class="svg me-2"
+              />
+              <span> {{ item.name }}</span>
+            </td>
+            <td>
+              <span>{{ item.creationDate }}</span>
+            </td>
+            <td *ngIf="show === 'files' && itemHasSize(item)">
+              <span> {{ item.size }}</span>
+            </td>
+            <td>
+              <img src="download.svg" class="svg me-1 icon">
+              <img src="rename.svg" class="svg me-1 icon">
+              <img src="trash.svg" class="svg icon">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

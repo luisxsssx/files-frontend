@@ -1,0 +1,33 @@
+<button
+  type="button"
+  class="btn"
+  data-bs-toggle="modal"
+  data-bs-target="#modalFile"
+>
+  <img src="add-file.svg" class="svg2" />
+</button>
+
+<div
+  class="modal fade"
+  id="modalFile"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">New File</h1>
+      </div>
+      <div class="input-group mb-3 w-75 p-3">
+        <input type="file" class="form-control" id="inputGroupFile01" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button type="button" class="btn">Upload File</button>
+      </div>
+    </div>
+  </div>
+</div>

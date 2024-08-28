@@ -4,7 +4,7 @@ import { NgClass, NgFor } from '@angular/common';
 import { Router } from '@angular/router';;
 import { MatIconModule } from '@angular/material/icon';
 import { File, Folder } from '../../../../models/file';
-import { UnitComponent } from "../../../layout/unit/unit.component";
+import { UnitComponent } from "../unit/unit.component";
 import { SearchBarComponent } from "../../../layout/search-bar/search-bar.component";
 import { SidebarComponent } from "../../../layout/sidebar/sidebar.component";
 import { FolderContentComponent } from "../../folder-content/folder-content.component";

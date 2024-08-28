@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 import { endpoints } from '../../models/api';
 import { Observable } from 'rxjs';
 import { File, Folder } from '../../models/file';
+import { enableDebugTools } from '@angular/platform-browser';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getBaseFolderContent(): Observable<File[]> {
     return this.http.get<File[]>(endpoints.content.getContent);
@@ -21,13 +21,21 @@ export class ApiService {
   }
 
   // Filter folders
-  getFolders(path: string = ''): Observable<Folder[]> {
+  getFolders(path: string): Observable<Folder[]> {
     return this.http.get<Folder[]>(endpoints.content.getFolders(path));
   }
 
   // Filter folders
-  getFiles(path: string = ''): Observable<File[]> {
+  getFiles(path: string): Observable<File[]> {
     return this.http.get<File[]>(endpoints.content.getFiles(path));
   }
 
+  ///////////////////////
+  /// POST OPERATIONS ///
+  ///////////////////////
+
+  addFile(file: File): Observable<File> {
+    return this.http.post<File>(endpoints.add.postFiles, file);
+  }
+  
 }

@@ -1,6 +1,5 @@
-.color {
-    background-color: #e9ecef;
-    color: #212529;
+.svg {
+    height: 20px;
 }
 
 .svg {
@@ -22,6 +21,6 @@
     display: inline-block;
 }
 
-.col {
+.table {
     cursor: pointer;
 }
