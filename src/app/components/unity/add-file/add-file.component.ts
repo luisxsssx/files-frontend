@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { File } from '../../../models/file';
+import { File } from '../../../../models/file';
 
 @Component({
   selector: 'app-add-element',

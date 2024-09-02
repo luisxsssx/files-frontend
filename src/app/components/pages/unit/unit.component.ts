@@ -4,8 +4,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { File, Folder } from '../../../../models/file';
 import { ApiService } from '../../../services/api.service';
 import { Router } from '@angular/router';
-import { AddElementComponent } from "../../add-file/add-file.component";
-import { AddFolderComponent } from "../../add-folder/add-folder.component";
+import { AddElementComponent } from "../../unity/add-file/add-file.component";
+import { AddFolderComponent } from "../../unity/add-folder/add-folder.component";
 
 @Component({
   selector: 'app-unit',

@@ -4,7 +4,7 @@ import { ApiService } from '../../services/api.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgClass, NgFor } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { AddElementComponent } from "../../components/add-file/add-file.component";
+import { AddElementComponent } from "../../components/unity/add-file/add-file.component";
 
 @Component({
   selector: 'app-sidebar',

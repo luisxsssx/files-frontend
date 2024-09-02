@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api.service';
+import { ApiService } from '../../../services/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgFor } from '@angular/common';
-import { SidebarComponent } from "../../layout/sidebar/sidebar.component";
-import { SearchBarComponent } from "../../layout/search-bar/search-bar.component";
+import { SidebarComponent } from "../../../layout/sidebar/sidebar.component";
+import { SearchBarComponent } from "../../../layout/search-bar/search-bar.component";
 
 @Component({
   selector: 'app-folder-content',
