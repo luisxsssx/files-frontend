@@ -1,6 +1,6 @@
 import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NetworkService } from '../../services/network.service';
+import { NetworkService } from '../../../services/network.service';
 import { MatIconModule } from '@angular/material/icon';
 import { Subscription } from 'rxjs';
 

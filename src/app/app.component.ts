@@ -1,7 +1,7 @@
 import { CommonModule, NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { OfflineComponent } from "./components/offline/offline.component";
+import { OfflineComponent } from "./components/pages/offline/offline.component";
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { SearchBarComponent } from './layout/search-bar/search-bar.component';
