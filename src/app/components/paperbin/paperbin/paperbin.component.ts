@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { SidebarComponent } from '../../../layout/sidebar/sidebar.component';
-import { SearchBarComponent } from '../../../layout/search-bar/search-bar.component';
 
 @Component({
   selector: 'app-paperbin',
   standalone: true,
-  imports: [SidebarComponent, SearchBarComponent],
+  imports: [SidebarComponent],
   templateUrl: './paperbin.component.html',
   styleUrl: './paperbin.component.css'
 })

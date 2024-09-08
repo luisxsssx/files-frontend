@@ -4,16 +4,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { NgFor, NgIf } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 import { SidebarComponent } from '../../../layout/sidebar/sidebar.component';
-import { SearchBarComponent } from '../../../layout/search-bar/search-bar.component';
 import { ApiService } from '../../../services/api.service';
 import { File, Folder } from '../../../../models/file';
 import { AddElementComponent } from "../add-file/add-file.component";
 import { AddFolderComponent } from "../add-folder/add-folder.component";
+import { FormsModule } from '@angular/forms';
+import { FilterPipe } from "../../../pipes/filter.pipe";
 
 @Component({
   selector: 'app-my-unit',
   standalone: true,
-  imports: [MatIconModule, NgFor, NgIf, SidebarComponent, SearchBarComponent, AddElementComponent, AddFolderComponent],
+  imports: [MatIconModule, NgFor, NgIf, SidebarComponent, AddElementComponent, AddFolderComponent, FormsModule, FilterPipe],
   templateUrl: './my-unit.component.html',
   styleUrl: './my-unit.component.css'
 })
@@ -23,6 +24,7 @@ export class MyUnitComponent implements OnInit {
   items: (File | Folder)[] = [];
   folder: Folder[] = [];
   files: File[] = [];
+  searchContent = '';
 
   constructor(private service: ApiService, private route: Router, private tittle: Title) { }
 

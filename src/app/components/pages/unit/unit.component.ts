@@ -6,11 +6,13 @@ import { ApiService } from '../../../services/api.service';
 import { Router } from '@angular/router';
 import { AddElementComponent } from "../../unity/add-file/add-file.component";
 import { AddFolderComponent } from "../../unity/add-folder/add-folder.component";
+import { FilterPipe } from "../../../pipes/filter.pipe";
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-unit',
   standalone: true,
-  imports: [MatIconModule, NgFor, NgClass, NgIf, AddElementComponent, AddFolderComponent],
+  imports: [MatIconModule, NgFor, NgClass, NgIf, AddElementComponent, AddFolderComponent, FilterPipe, FormsModule],
   templateUrl: './unit.component.html',
   styleUrl: './unit.component.css'
 })
@@ -18,6 +20,7 @@ export class UnitComponent implements OnInit {
   show: 'files' | 'folder' | null = null;
   items: (File | Folder)[] = [];
   files: File[] = [];
+  searchContent = '';
 
   constructor(private service: ApiService, private router: Router) { }
 
@@ -43,6 +46,7 @@ export class UnitComponent implements OnInit {
     this.service.getFiles(path).subscribe(
       data => {
         this.items = data;
+     
         console.log('Files: ', this.items);
         this.show = 'files';
       },

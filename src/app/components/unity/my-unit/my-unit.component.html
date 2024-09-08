@@ -9,7 +9,20 @@
     </div>
     <div class="col py-3">
       <h3 class="text-center">My Unit</h3>
-      <app-search-bar />
+      <nav class="container-lg w-50 p-3">
+        <div class="container-fluid">
+          <form class="d-flex" role="search">
+            <input
+              [(ngModel)]="searchContent"
+              class="form-control me-2 rounded-pill"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+              name="searchContent"
+            />
+          </form>
+        </div>
+      </nav>
       <div class="container-lg m-2 p-4">
         <div class="my-4">
           <div class="table-responsive my-4">
@@ -23,7 +36,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of items" class="hover-column">
+                <tr *ngFor="let item of items|filter:searchContent" class="hover-column">
                   <td class="navbar-brand d-flex align-items-center">
                     <img
                       *ngIf="itemHasSize(item)"

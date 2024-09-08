@@ -5,7 +5,6 @@ import { Router } from '@angular/router';;
 import { MatIconModule } from '@angular/material/icon';
 import { File, Folder } from '../../../../models/file';
 import { UnitComponent } from "../unit/unit.component";
-import { SearchBarComponent } from "../../../layout/search-bar/search-bar.component";
 import { SidebarComponent } from "../../../layout/sidebar/sidebar.component";
 import { FolderContentComponent } from "../folder-content/folder-content.component";
 import { Title } from '@angular/platform-browser';
@@ -13,12 +12,13 @@ import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor, SearchBarComponent, MatIconModule, NgClass, UnitComponent, SidebarComponent, FolderContentComponent],
+  imports: [NgFor, MatIconModule, NgClass, UnitComponent, SidebarComponent, FolderContentComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 
 export class HomeComponent implements OnInit {
+[x: string]: any;
 
   isNavbarCollapse = true;
   folders: Folder[] = [];
