@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { endpoints } from '../../models/api';
 import { Observable } from 'rxjs';
 import { File, Folder } from '../../models/file';
-import { enableDebugTools } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root',
@@ -28,6 +27,10 @@ export class ApiService {
   // Filter folders
   getFiles(path: string): Observable<File[]> {
     return this.http.get<File[]>(endpoints.content.getFiles(path));
+  }
+
+  getPaperBin(): Observable<File[]> {
+    return this.http.get<File[]>(endpoints.content.getPaperBin);
   }
 
   ///////////////////////

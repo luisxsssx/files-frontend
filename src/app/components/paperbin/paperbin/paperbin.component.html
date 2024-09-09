@@ -21,10 +21,10 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>s</td>
-                  <td>s</td>
-                  <td>s</td>
+                <tr *ngFor="let i of files">
+                  <td>{{i.name}}</td>
+                  <td>{{i.creationDate}}</td>
+                  <td>{{i.size}}</td>
                 </tr>
               </tbody>
             </table>
