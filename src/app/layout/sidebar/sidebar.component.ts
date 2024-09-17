@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { File, Folder } from '../../../models/file';
+import { FileModel, FolderModel } from '../../../models/file';
 import { ApiService } from '../../services/api.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgClass, NgFor } from '@angular/common';
@@ -17,8 +17,8 @@ import { AddElementComponent } from "../../components/unity/add-file/add-file.co
 export class SidebarComponent implements OnInit {
 
   isNavbarCollapse = true;
-  folders: Folder[] = [];
-  files: File[] = [];
+  folders: FolderModel[] = [];
+  files: FileModel[] = [];
   path: string = '';
   firstClick = true;
 

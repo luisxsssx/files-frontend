@@ -1,10 +1,10 @@
-export interface File {
+export interface FileModel {
     name: string;
     size: string;
     creationDate: Date;
 }
 
-export interface Folder {
+export interface FolderModel {
     name: string;
     creationDate: Date;
 }

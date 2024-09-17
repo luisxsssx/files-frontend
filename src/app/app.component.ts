@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgClass, RouterLink, CommonModule, FormsModule, OfflineComponent, HttpClientModule, FormsModule],
+  imports: [RouterOutlet, NgClass, RouterLink, CommonModule, FormsModule, OfflineComponent, HttpClientModule, FormsModule, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

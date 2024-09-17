@@ -1,37 +1,41 @@
 import { Component } from '@angular/core';
-import { File } from '../../../../models/file';
+import { FileModel } from '../../../../models/file';
+import { ApiService } from '../../../services/api.service';
+import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-add-element',
   standalone: true,
-  imports: [],
+  imports: [NgIf, CommonModule],
   templateUrl: './add-file.component.html',
   styleUrl: './add-file.component.css'
 })
 export class AddElementComponent {
-  fileData: File | null = null;
+  selectedFile: File | undefined;
+  fileModel!: FileModel;
 
-  constructor(){}
+  constructor(private service: ApiService){}
 
-   onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      const file = input.files[0]; 
-      
-      this.fileData = {
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+
+    if(file) {
+      this.selectedFile = file;
+
+      this.fileModel = {
         name: file.name,
-        size: Math.round(file.size / 1024) + ' KB', 
-        creationDate: new Date(file.lastModified), 
+        size: `${file.size}`,
+        creationDate: new Date()
       };
-
-      console.log('Archivo seleccionado:', this.fileData);
     }
   }
 
-  uploadFile() {
-    if(this.fileData)
-      console.log('Upload file:', this.fileData)
+  onUpload() {
+    if(this.selectedFile) {
+      this.service.uploadFile(this.selectedFile).subscribe({
+        next: (response) => console.log('File uploaded succesfully!', response),
+        error: (error) => console.error('Error uploading file:', error)
+      });
+    }
   }
-
-
 }

@@ -1,17 +1,21 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { endpoints } from '../../models/api';
 import { Observable } from 'rxjs';
-import { File, Folder } from '../../models/file';
+import { FileModel, FolderModel } from '../../models/file';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
+
+  private urlBase = "http://localhost:8080/home/upload"
+  private urlFolder = "http://localhost:8080/home/folder/create"
+
   constructor(private http: HttpClient) {}
 
-  getBaseFolderContent(): Observable<File[]> {
-    return this.http.get<File[]>(endpoints.content.getContent);
+  getBaseFolderContent(): Observable<FileModel[]> {
+    return this.http.get<FileModel[]>(endpoints.content.getContent);
   }
 
   getFolderContent(path: string): Observable<string[]> {
@@ -20,25 +24,38 @@ export class ApiService {
   }
 
   // Filter folders
-  getFolders(path: string): Observable<Folder[]> {
-    return this.http.get<Folder[]>(endpoints.content.getFolders(path));
+  getFolders(path: string): Observable<FolderModel[]> {
+    return this.http.get<FolderModel[]>(endpoints.content.getFolders(path));
   }
 
   // Filter folders
-  getFiles(path: string): Observable<File[]> {
-    return this.http.get<File[]>(endpoints.content.getFiles(path));
+  getFiles(path: string): Observable<FileModel[]> {
+    return this.http.get<FileModel[]>(endpoints.content.getFiles(path));
   }
 
-  getPaperBin(): Observable<File[]> {
-    return this.http.get<File[]>(endpoints.content.getPaperBin);
+  getPaperBin(): Observable<FileModel[]> {
+    return this.http.get<FileModel[]>(endpoints.content.getPaperBin);
   }
 
   ///////////////////////
   /// POST OPERATIONS ///
   ///////////////////////
 
-  addFile(file: File): Observable<File> {
-    return this.http.post<File>(endpoints.add.postFiles, file);
+  uploadFile(file: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('file', file, file.name);
+
+    const headers = new HttpHeaders();
+
+    return this.http.post<any>(this.urlBase, formData, {headers});
   }
+
+  createFolder(folderName: string): Observable<string> {
+    const params = new HttpParams().set('folderName', folderName);
+
+    return this.http.post<string>(this.urlFolder, {}, {params});
+  }
+
+ 
   
 }

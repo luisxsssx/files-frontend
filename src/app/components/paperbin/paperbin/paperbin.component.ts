@@ -3,7 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { SidebarComponent } from '../../../layout/sidebar/sidebar.component';
 import { AddElementComponent } from "../../unity/add-file/add-file.component";
 import { ApiService } from '../../../services/api.service';
-import { File } from '../../../../models/file';
+import { FileModel } from '../../../../models/file';
 import { NgFor } from '@angular/common';
 
 @Component({
@@ -15,7 +15,7 @@ import { NgFor } from '@angular/common';
 })
 export class PaperbinComponent implements OnInit {
 
-  files: File[] = [];
+  files: FileModel[] = [];
 
   constructor(private tittle: Title, private service: ApiService) { }
 

@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { homedir } from 'node:os';
 import { HomeComponent } from './components/pages/home/home.component';
 import { FolderContentComponent } from './components/pages/folder-content/folder-content.component';
 import { MyUnitComponent } from './components/unity/my-unit/my-unit.component';

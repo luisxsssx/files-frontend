@@ -3,7 +3,7 @@ import { ApiService } from '../../../services/api.service';
 import { NgClass, NgFor } from '@angular/common';
 import { Router } from '@angular/router';;
 import { MatIconModule } from '@angular/material/icon';
-import { File, Folder } from '../../../../models/file';
+import { FileModel, FolderModel } from '../../../../models/file';
 import { UnitComponent } from "../unit/unit.component";
 import { SidebarComponent } from "../../../layout/sidebar/sidebar.component";
 import { FolderContentComponent } from "../folder-content/folder-content.component";
@@ -21,8 +21,8 @@ export class HomeComponent implements OnInit {
 [x: string]: any;
 
   isNavbarCollapse = true;
-  folders: Folder[] = [];
-  files: File[] = [];
+  folders: FolderModel[] = [];
+  files: FileModel[] = [];
   path: string = '';
   firstClick = true;
 
