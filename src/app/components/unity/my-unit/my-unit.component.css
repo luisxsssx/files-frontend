@@ -25,3 +25,13 @@
 .col {
     cursor: pointer;
 }
+
+.ti {
+    padding: 1%;
+    display: inline-block;
+}
+
+.ti:hover {
+    background-color: #ced4da;
+    border-radius: 4vh;   
+}

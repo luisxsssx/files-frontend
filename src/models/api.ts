@@ -10,5 +10,6 @@ export const endpoints = {
     },
     add: {
         postFiles: `${URL_BASE}/upload`,
+        createFolder: `${URL_BASE}/folder/create`
     }
 }

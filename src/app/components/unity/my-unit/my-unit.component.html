@@ -29,9 +29,9 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">Name</th>
-                  <th class="col">Creation Date</th>
-                  <th class="col">Size</th>
+                  <th scope="col"><span class="ti" (click)="sortByName()">Name</span></th>
+                  <th class="col"><span class="ti" (click)="sortByDate()">Creation Date</span></th>
+                  <th class="col"><span class="ti|">Size</span></th>
                   <th><app-add-element/><app-add-folder/></th>
                 </tr>
               </thead>
@@ -50,7 +50,7 @@
                     />
                     <span>{{ item.name }}</span>
                   </td>
-                  <td>{{ item.creationDate }}</td>
+                  <td>{{ item.creationDate  | date:'mediumDate' }}</td>
                   <td>{{ itemHasSize(item) ? item.size : "-" }}</td>
                   <td>
                     <img src="download.svg" class="svg me-1 icon" />
