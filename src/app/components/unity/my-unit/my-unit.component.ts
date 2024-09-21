@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 import { SidebarComponent } from '../../../layout/sidebar/sidebar.component';
 import { ApiService } from '../../../services/api.service';
@@ -14,7 +14,7 @@ import { FilterPipe } from "../../../pipes/filter.pipe";
 @Component({
   selector: 'app-my-unit',
   standalone: true,
-  imports: [MatIconModule, NgFor, NgIf, SidebarComponent, AddElementComponent, AddFolderComponent, FormsModule, FilterPipe],
+  imports: [MatIconModule, NgFor, NgIf, SidebarComponent, AddElementComponent, CommonModule, AddFolderComponent, FormsModule, FilterPipe],
   templateUrl: './my-unit.component.html',
   styleUrl: './my-unit.component.css'
 })
@@ -24,7 +24,10 @@ export class MyUnitComponent implements OnInit {
   items: (FileModel | FolderModel)[] = [];
   folder: FolderModel[] = [];
   files: FileModel[] = [];
+  path: string = '';
+  isRowCollapse = true;
   searchContent = '';
+  firstClick = true;
 
   constructor(private service: ApiService, private route: Router, private tittle: Title) { }
 
@@ -65,4 +68,13 @@ export class MyUnitComponent implements OnInit {
     );
     this.show = 'files';
   }
+
+  sortByDate() {
+    this.items.sort((a, b) => b.creationDate.getTime()- a.creationDate.getTime());
+  }
+
+  sortByName() {
+    this.items.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
 }
