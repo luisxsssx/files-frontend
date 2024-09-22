@@ -18,7 +18,7 @@
     <button
       type="button"
       class="btn btn-outline-secondary rounded-start-2"
-      aria-pressed="isActive"
+      [class.active]="show === 'files'"
       (click)="loadFiles()"
     >
       <img src="files.svg" class="svg" />
@@ -27,7 +27,7 @@
     <button
       type="button"
       class="btn btn-outline-secondary rounded-end-2"
-      aria-pressed="isActive"
+      [class.active]="show === 'folder'"
       (click)="loadFolders()"
     >
       <img src="folder.svg" class="svg" />
@@ -47,26 +47,22 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of items|filter:searchContent" class="hover-column">
+          <tr *ngFor="let item of items | filter:searchContent" class="hover-column">
             <td class="navbar-brand d-flex align-items-center">
               <img *ngIf="itemHasSize(item)" src="files.svg" class="svg me-2" />
-              <img
-                *ngIf="!itemHasSize(item)"
-                src="folder.svg"
-                class="svg me-2"
-              />
+              <img *ngIf="!itemHasSize(item)" src="folder.svg" class="svg me-2" />
               <span> {{ item.name }}</span>
             </td>
             <td>
               <span>{{ item.creationDate | date:'mediumDate' }}</span>
             </td>
             <td *ngIf="show === 'files' && itemHasSize(item)">
-              <span> {{ item.size }}</span>
+              <span> {{ item.size }} KB</span>
             </td>
             <td>
-              <img src="download.svg" class="svg me-1 icon">
-              <img src="rename.svg" class="svg me-1 icon">
-              <img src="trash.svg" class="svg icon">
+              <img src="download.svg" class="svg me-1 icon" alt="Download">
+              <img src="rename.svg" class="svg me-1 icon" alt="Rename">
+              <img src="trash.svg" class="svg icon" alt="Trash">
             </td>
           </tr>
         </tbody>

@@ -6,6 +6,7 @@ import { ApiService } from '../../../services/api.service';
 import { Router } from '@angular/router';
 import { FilterPipe } from "../../../pipes/filter.pipe";
 import { FormsModule } from '@angular/forms';
+import { error } from 'console';
 
 @Component({
   selector: 'app-unit',
@@ -20,10 +21,9 @@ export class UnitComponent implements OnInit {
   files: FileModel[] = [];
   searchContent = '';
   isActive = false;
-
-  data: {name: string; creationDate: Date} [] = [...this.items];
-  orderDate: boolean = false;
-
+  content: string[] = [];
+  errorMessage: string = '';
+  
   constructor(private service: ApiService, private router: Router) { }
 
   ngOnInit(): void {
@@ -34,46 +34,33 @@ export class UnitComponent implements OnInit {
     return (item as FileModel).size !== undefined;
   }
 
-  loadBaseFolderContent(): void {
-    this.service.getBaseFolderContent().subscribe(
-      data => {
-        console.log('Files:', data);
-        this.files = data;
-      },
-      error => console.error('Error loading base folder content', error)
-    );
-  }
-
-  loadFiles(path: string = '') {
-    this.service.getFiles(path).subscribe(
-      data => {
-        this.items = data;
-        console.log('Files: ', this.items);
-        this.show = 'files';
-
+  loadFiles(): void {
+    this.service.getAllContent('file').subscribe({
+      next: (data: (FileModel | FolderModel)[]) => {
+        this.items = data.filter((item): item is FileModel => 'size' in item);
+        this.show = 'files'; 
+        console.log('Files', this.items)
         this.sortByDate();
       },
-      error => {
-        console.log('Error getting files', error);
+      error: (error) => {
+        console.error('Error al cargar archivos:', error);
       }
-    )
+    });
   }
 
-  loadFolders(path: string = '') {
-    this.service.getFolders(path).subscribe(
-      data => {
-        this.items = data;
-        console.log('Folders: ' + this.items);
-        this.show = 'folder';
-
+  loadFolders(): void {
+    this.service.getAllContent('folder').subscribe({
+      next: (data: (FileModel | FolderModel)[]) => {
+        this.items = data.filter((item): item is FolderModel => !('size' in item));
+        this.show = 'folder';  
         this.sortByDate();
       },
-      error => {
-        console.log('Error getting folders', error)
+      error: (error) => {
+        console.error('Error al cargar carpetas:', error);
       }
-    )
+    });
   }
-
+  
   sortByDate() {
     this.items.sort((a, b) => b.creationDate.getTime()- a.creationDate.getTime());
   }

@@ -6,13 +6,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { FileModel, FolderModel } from '../../../../models/file';
 import { UnitComponent } from "../unit/unit.component";
 import { SidebarComponent } from "../../../layout/sidebar/sidebar.component";
-import { FolderContentComponent } from "../folder-content/folder-content.component";
 import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor, MatIconModule, NgClass, UnitComponent, SidebarComponent, FolderContentComponent],
+  imports: [NgFor, MatIconModule, NgClass, UnitComponent, SidebarComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

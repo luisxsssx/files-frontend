@@ -58,6 +58,7 @@ export class MyUnitComponent implements OnInit {
       },
       error => console.log('Error getting folders', error)
     );
+    
     this.service.getFiles(path).subscribe(
       filesData => {
         this.files = filesData;

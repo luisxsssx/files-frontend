@@ -44,6 +44,24 @@ export class ApiService {
     return this.http.get<FileModel[]>(endpoints.content.getPaperBin);
   }
 
+  getAllContent(type: string): Observable<(FileModel | FolderModel)[]> {
+    if (type !== 'file' && type !== 'folder') {
+      throw new Error(`Invalid type`);
+    }
+  
+    const url = endpoints.content.getAllContent(type);
+    
+    return this.http.get<(FileModel | FolderModel)[]>(url).pipe(
+      map((items: (FileModel | FolderModel)[]) => 
+        items.map(item => ({
+          ...item,
+          creationDate: new Date(item.creationDate)
+        }))
+      )
+    );
+  }
+  
+
   ///////////////////////
   /// POST OPERATIONS ///
   ///////////////////////
