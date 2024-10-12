@@ -10,11 +10,12 @@ import { AddElementComponent } from "../add-file/add-file.component";
 import { AddFolderComponent } from "../add-folder/add-folder.component";
 import { FormsModule } from '@angular/forms';
 import { FilterPipe } from "../../../pipes/filter.pipe";
+import { AlertComponent } from "../../notification/alert/alert.component";
 
 @Component({
   selector: 'app-my-unit',
   standalone: true,
-  imports: [MatIconModule, NgFor, NgIf, SidebarComponent, AddElementComponent, CommonModule, AddFolderComponent, FormsModule, FilterPipe],
+  imports: [MatIconModule, NgFor, NgIf, SidebarComponent, AddElementComponent, CommonModule, AddFolderComponent, FormsModule, FilterPipe, AlertComponent],
   templateUrl: './my-unit.component.html',
   styleUrl: './my-unit.component.css'
 })
@@ -77,5 +78,4 @@ export class MyUnitComponent implements OnInit {
   sortByName() {
     this.items.sort((a, b) => a.name.localeCompare(b.name));
   }
-
 }

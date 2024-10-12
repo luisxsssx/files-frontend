@@ -29,14 +29,21 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col"><span class="ti" (click)="sortByName()">Name</span></th>
-                  <th class="col"><span class="ti" (click)="sortByDate()">Creation Date</span></th>
+                  <th scope="col">
+                    <span class="ti" (click)="sortByName()">Name</span>
+                  </th>
+                  <th class="col">
+                    <span class="ti" (click)="sortByDate()">Creation Date</span>
+                  </th>
                   <th class="col"><span class="ti|">Size</span></th>
-                  <th><app-add-element/><app-add-folder/></th>
+                  <th><app-add-element /><app-add-folder /></th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of items|filter:searchContent" class="hover-column">
+                <tr
+                  *ngFor="let item of items | filter : searchContent"
+                  class="hover-column"
+                >
                   <td class="navbar-brand d-flex align-items-center">
                     <img
                       *ngIf="itemHasSize(item)"
@@ -50,7 +57,7 @@
                     />
                     <span>{{ item.name }}</span>
                   </td>
-                  <td>{{ item.creationDate  | date:'mediumDate' }}</td>
+                  <td>{{ item.creationDate | date : "mediumDate" }}</td>
                   <td>{{ itemHasSize(item) ? item.size : "-" }}</td>
                   <td>
                     <img src="download.svg" class="svg me-1 icon" />
