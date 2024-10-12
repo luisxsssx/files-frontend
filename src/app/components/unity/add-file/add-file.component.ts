@@ -37,14 +37,13 @@ export class AddElementComponent {
       this.service.uploadFile(this.selectedFile).subscribe({
         next: (response) => {
           console.log('File uploaded succesfully!', response);
-          this.alertService.showSuccessAlert();
+          this.success();
           this.router.navigateByUrl('my-unit', {skipLocationChange: true});
-
           this.resetForm();
         },
         error: (error) => {
           console.error('Error uploading file:', error);
-          this.alertService.showWarningAlert();
+          this.warning();
         }
       });
     }
@@ -55,4 +54,15 @@ export class AddElementComponent {
     this.fileModel = { name: '', size: '', creationDate: new Date() }; 
   }
 
+  success() {
+    setTimeout(() => {
+      this.alertService.showSuccessAlert();
+    }, 3000)
+  }
+  
+  warning() {
+    setTimeout(() => {
+      this.alertService.showWarningAlert();
+    }, 3000)
+  }
 }
