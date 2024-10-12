@@ -30,7 +30,7 @@ export class MyUnitComponent implements OnInit {
   searchContent = '';
   firstClick = true;
 
-  constructor(private service: ApiService, private route: Router, private tittle: Title) { }
+  constructor(private service: ApiService, private router: Router, private tittle: Title) { }
 
   ngOnInit(): void {
     this.tittle.setTitle('My unit - Home Cloud');
@@ -78,4 +78,10 @@ export class MyUnitComponent implements OnInit {
   sortByName() {
     this.items.sort((a, b) => a.name.localeCompare(b.name));
   }
+
+  onSelectFile(folderName: string): void {
+    console.log('Navegando a la carpeta:', folderName); 
+    this.router.navigate(['/folder', encodeURIComponent(folderName)]);
+  }
+  
 }

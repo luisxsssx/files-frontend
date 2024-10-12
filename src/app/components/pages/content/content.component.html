@@ -1,0 +1,60 @@
+<div class="container-fluid no-selected">
+  <div class="row flex-nowrap">
+    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 color">
+      <div
+        class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100"
+      >
+        <app-sidebar />
+      </div>
+    </div>
+    <div class="col py-3">
+      <!-- Barra de búsqueda colocada aquí -->
+      <div class="container-lg w-50 m-2">
+        <form class="d-flex" role="search">
+          <input
+            class="form-control me-2 rounded-pill"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            name="searchContent"
+          />
+        </form>
+        <h3 class="m-2">
+          <a [routerLink]="['/my-unit']" routerLinkActive="router-link-active"
+            >My Unit</a
+          >
+          > {{ folderName }}
+        </h3>
+      </div>
+
+      <div class="container-lg m-2 p-4">
+        <div class="my-4">
+          <div class="table-responsive my-4">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col"><span>Name</span></th>
+                  <th class="col"><span>Creation Date</span></th>
+                  <th class="col"><span>Size</span></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="hover-column">
+                  <td class="navbar-brand d-flex align-items-center">
+                    <img />
+                    <img />
+                    <span></span>
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
