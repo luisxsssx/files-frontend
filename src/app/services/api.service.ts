@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { endpoints } from '../../models/api';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 import { FileModel, FolderModel } from '../../models/file';
+import { error } from 'console';
 
 @Injectable({
   providedIn: 'root',
@@ -26,17 +27,35 @@ export class ApiService {
       map((folders: FolderModel[]) => folders.map(folder => ({
         ...folder,
         creationDate: new Date(folder.creationDate)
-      })))
+      }))),
+      tap(folders => {
+        if(folders.length === 0) {
+          console.warn('No folder found');
+        }
+      }),
+      catchError(() => {
+        console.error('Error getting folders');
+        return of([]);
+      })
     );
   }
 
-  // Filter folders
+  // Filter files
   getFiles(path: string): Observable<FileModel[]> {
     return this.http.get<FileModel[]>(endpoints.content.getFiles(path)).pipe(
       map((files: FileModel[]) => files.map(file => ({
         ...file,
         creationDate: new Date(file.creationDate)
-      })))
+      }))),
+      tap(files => {
+        if (files.length === 0) {
+          console.warn('No files found');
+        }
+      }),
+      catchError(() => {
+        console.error('Error getting folders');
+        return of([]);
+      })
     );
   }
 

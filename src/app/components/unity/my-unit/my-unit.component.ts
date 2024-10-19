@@ -30,6 +30,8 @@ export class MyUnitComponent implements OnInit {
   searchContent = '';
   firstClick = true;
 
+  hasData: boolean = true;
+
   constructor(private service: ApiService, private router: Router, private tittle: Title) { }
 
   ngOnInit(): void {
@@ -52,10 +54,14 @@ export class MyUnitComponent implements OnInit {
   }
 
   loadFilesAndFolders(path: string = ''): void {
+    this.items = [];
+    this.hasData = true;
+
     this.service.getFolders(path).subscribe(
       foldersData => {
         this.items = [...this.items, ...foldersData];
         console.log('Folders: ', foldersData);
+        this.checkIfNoData();
       },
       error => console.log('Error getting folders', error)
     );
@@ -65,6 +71,7 @@ export class MyUnitComponent implements OnInit {
         this.files = filesData;
         this.items = [...this.items, ...filesData];
         console.log('Files: ', this.files);
+        this.checkIfNoData();
       },
       error => console.log('Error getting files', error)
     );
@@ -82,6 +89,14 @@ export class MyUnitComponent implements OnInit {
   onSelectFile(folderName: string): void {
     console.log('Navegando a la carpeta:', folderName); 
     this.router.navigate(['/folder', encodeURIComponent(folderName)]);
+  }
+
+  checkIfNoData(): void {
+    if(this.items.length === 0) {
+      this.hasData = false;
+    } else {
+      this.hasData = true;
+    }
   }
   
 }

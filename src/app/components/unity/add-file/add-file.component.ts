@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { FileModel } from '../../../../models/file';
 import { ApiService } from '../../../services/api.service';
 import { CommonModule, NgIf } from '@angular/common';
 import { AlertService } from '../../../services/alert.service';
 import { Router } from '@angular/router';
+import { MyUnitComponent } from '../my-unit/my-unit.component';
 
 @Component({
   selector: 'app-add-element',
@@ -57,12 +58,12 @@ export class AddElementComponent {
   success() {
     setTimeout(() => {
       this.alertService.showSuccessAlert();
-    }, 3000)
+    }, 1000)
   }
   
   warning() {
     setTimeout(() => {
       this.alertService.showWarningAlert();
-    }, 3000)
+    }, 1000)
   }
 }

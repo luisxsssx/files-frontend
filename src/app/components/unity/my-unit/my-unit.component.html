@@ -25,7 +25,11 @@
       </nav>
       <div class="container-lg m-2 p-4">
         <div class="my-4">
-          <div class="table-responsive my-4">
+          <div *ngIf="!hasData" class="alert alert-warning text-center">
+            Upload the files here
+          </div>
+
+          <div *ngIf="hasData" class="table-responsive my-4">
             <table class="table">
               <thead>
                 <tr>
