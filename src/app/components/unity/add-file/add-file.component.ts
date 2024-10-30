@@ -1,30 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FileModel } from '../../../../models/file';
 import { ApiService } from '../../../services/api.service';
 import { CommonModule, NgIf } from '@angular/common';
 import { AlertService } from '../../../services/alert.service';
-import { Router } from '@angular/router';
-import { MyUnitComponent } from '../my-unit/my-unit.component';
+import { FilesService } from '../../../services/files.service';
 
 @Component({
   selector: 'app-add-element',
   standalone: true,
   imports: [NgIf, CommonModule],
   templateUrl: './add-file.component.html',
-  styleUrl: './add-file.component.css'
+  styleUrls: ['./add-file.component.css']
 })
-export class AddElementComponent {
+export class AddElementComponent implements OnInit, OnDestroy {
   selectedFile: File | undefined;
   fileModel!: FileModel;
+  onFileUploaded: boolean = false;
 
-  constructor(private service: ApiService, private alertService: AlertService, private router: Router){}
+  constructor(private service: ApiService, private alertService: AlertService, private fileService: FilesService) { }
+
+  ngOnInit(): void { }
+  ngOnDestroy(): void { }
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
 
-    if(file) {
+    if (file) {
       this.selectedFile = file;
-
       this.fileModel = {
         name: file.name,
         size: `${file.size}`,
@@ -34,13 +36,16 @@ export class AddElementComponent {
   }
 
   onUpload() {
-    if(this.selectedFile) {
-      this.service.uploadFile(this.selectedFile).subscribe({
+    if (this.selectedFile) {
+      this.fileService.uploadFile(this.selectedFile).subscribe({
         next: (response) => {
-          console.log('File uploaded succesfully!', response);
-          this.success();
-          this.router.navigateByUrl('my-unit', {skipLocationChange: true});
+          console.log('File uploaded successfully!', response);
           this.resetForm();
+          this.onFileUploaded = false;
+          this.fileService.notifyContentChanged();
+          setTimeout(() => {
+            this.onFileUploaded = true;
+          }, 4000);
         },
         error: (error) => {
           console.error('Error uploading file:', error);
@@ -52,18 +57,12 @@ export class AddElementComponent {
 
   resetForm() {
     this.selectedFile = undefined;
-    this.fileModel = { name: '', size: '', creationDate: new Date() }; 
+    this.fileModel = { name: '', size: '', creationDate: new Date() };
   }
 
-  success() {
-    setTimeout(() => {
-      this.alertService.showSuccessAlert();
-    }, 1000)
-  }
-  
   warning() {
     setTimeout(() => {
       this.alertService.showWarningAlert();
-    }, 1000)
+    }, 1000);
   }
 }

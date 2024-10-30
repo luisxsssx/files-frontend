@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
@@ -11,92 +11,88 @@ import { AddFolderComponent } from "../add-folder/add-folder.component";
 import { FormsModule } from '@angular/forms';
 import { FilterPipe } from "../../../pipes/filter.pipe";
 import { AlertComponent } from "../../notification/alert/alert.component";
+import { Subscription } from 'rxjs';
+import { FilesService } from '../../../services/files.service';
 
 @Component({
   selector: 'app-my-unit',
   standalone: true,
   imports: [MatIconModule, NgFor, NgIf, SidebarComponent, AddElementComponent, CommonModule, AddFolderComponent, FormsModule, FilterPipe, AlertComponent],
   templateUrl: './my-unit.component.html',
-  styleUrl: './my-unit.component.css'
+  styleUrls: ['./my-unit.component.css']
 })
-export class MyUnitComponent implements OnInit {
-
+export class MyUnitComponent implements OnInit, OnDestroy {
   show: 'files' | 'folder' | null = null;
   items: (FileModel | FolderModel)[] = [];
-  folder: FolderModel[] = [];
-  files: FileModel[] = [];
   path: string = '';
   isRowCollapse = true;
   searchContent = '';
-  firstClick = true;
-
   hasData: boolean = true;
 
-  constructor(private service: ApiService, private router: Router, private tittle: Title) { }
+  private contentChangedSubscription!: Subscription;
+
+  constructor(private service: ApiService, private router: Router, private title: Title, private fileService: FilesService) { }
 
   ngOnInit(): void {
-    this.tittle.setTitle('My unit - Home Cloud');
-    this.loadFilesAndFolders();
+    this.title.setTitle('My unit - Home Cloud');
+    this.loadContent();
+
+    this.contentChangedSubscription = this.fileService.contentChanged$.subscribe(() => {
+      this.loadContent();
+    });
   }
 
-  itemHasSize(item: File | FolderModel): item is File {
-    return (item as File).size !== undefined;
+  ngOnDestroy(): void {
+    this.contentChangedSubscription?.unsubscribe();
   }
 
-  loadRootContent(): void {
-    this.service.getBaseFolderContent().subscribe(
-      data => {
-        console.log('Files:', this.files);
-        this.files = data;
-      },
-      error => console.log('Error loading base folder content,', error)
-    );
-  }
-
-  loadFilesAndFolders(path: string = ''): void {
+  loadContent(path: string = ''): void {
     this.items = [];
     this.hasData = true;
 
     this.service.getFolders(path).subscribe(
       foldersData => {
-        this.items = [...this.items, ...foldersData];
-        console.log('Folders: ', foldersData);
+        this.items.push(...foldersData);
+        console.log('Folders:', foldersData);
         this.checkIfNoData();
       },
-      error => console.log('Error getting folders', error)
+      error => {
+        console.error('Error getting folders:', error);
+      }
     );
-    
+
     this.service.getFiles(path).subscribe(
       filesData => {
-        this.files = filesData;
-        this.items = [...this.items, ...filesData];
-        console.log('Files: ', this.files);
+        this.items.push(...filesData);
+        console.log('Files:', filesData);
         this.checkIfNoData();
       },
-      error => console.log('Error getting files', error)
+      error => {
+        console.error('Error getting files:', error);
+      }
     );
+
     this.show = 'files';
   }
 
-  sortByDate() {
-    this.items.sort((a, b) => b.creationDate.getTime()- a.creationDate.getTime());
-  }
-
-  sortByName() {
-    this.items.sort((a, b) => a.name.localeCompare(b.name));
-  }
-
   onSelectFile(folderName: string): void {
-    console.log('Navegando a la carpeta:', folderName); 
+    console.log('Navegando a la carpeta:', folderName);
     this.router.navigate(['/folder', encodeURIComponent(folderName)]);
   }
 
   checkIfNoData(): void {
-    if(this.items.length === 0) {
-      this.hasData = false;
-    } else {
-      this.hasData = true;
-    }
+    this.hasData = this.items.length > 0;
   }
-  
+
+  sortByDate(): void {
+    this.items.sort((a, b) => b.creationDate.getTime() - a.creationDate.getTime());
+  }
+
+  sortByName(): void {
+    this.items.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  itemHasSize(item: FileModel | FolderModel): item is FileModel {
+    return (item as FileModel).size !== undefined;
+  }
 }

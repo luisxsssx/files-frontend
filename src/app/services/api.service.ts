@@ -1,16 +1,15 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { endpoints } from '../../models/api';
-import { catchError, map, Observable, of, tap } from 'rxjs';
+import { catchError, map, Observable, of, Subject, tap } from 'rxjs';
 import { FileModel, FolderModel } from '../../models/file';
-import { error } from 'console';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getBaseFolderContent(): Observable<FileModel[]> {
     return this.http.get<FileModel[]>(endpoints.content.getContent);
@@ -21,7 +20,6 @@ export class ApiService {
     return this.http.get<string[]>(url);
   }
 
-  // Filter folders
   getFolders(path: string): Observable<FolderModel[]> {
     return this.http.get<FolderModel[]>(endpoints.content.getFolders(path)).pipe(
       map((folders: FolderModel[]) => folders.map(folder => ({
@@ -29,7 +27,7 @@ export class ApiService {
         creationDate: new Date(folder.creationDate)
       }))),
       tap(folders => {
-        if(folders.length === 0) {
+        if (folders.length === 0) {
           console.warn('No folder found');
         }
       }),
@@ -40,7 +38,6 @@ export class ApiService {
     );
   }
 
-  // Filter files
   getFiles(path: string): Observable<FileModel[]> {
     return this.http.get<FileModel[]>(endpoints.content.getFiles(path)).pipe(
       map((files: FileModel[]) => files.map(file => ({
@@ -53,7 +50,7 @@ export class ApiService {
         }
       }),
       catchError(() => {
-        console.error('Error getting folders');
+        console.error('Error getting files');
         return of([]);
       })
     );
@@ -67,11 +64,11 @@ export class ApiService {
     if (type !== 'file' && type !== 'folder') {
       throw new Error(`Invalid type`);
     }
-  
+
     const url = endpoints.content.getAllContent(type);
-    
+
     return this.http.get<(FileModel | FolderModel)[]>(url).pipe(
-      map((items: (FileModel | FolderModel)[]) => 
+      map((items: (FileModel | FolderModel)[]) =>
         items.map(item => ({
           ...item,
           creationDate: new Date(item.creationDate)
@@ -79,26 +76,12 @@ export class ApiService {
       )
     );
   }
-  
 
-  ///////////////////////
-  /// POST OPERATIONS ///
-  ///////////////////////
 
-  uploadFile(file: File): Observable<any> {
-    const formData: FormData = new FormData();
-    formData.append('file', file, file.name);
-
-    const headers = new HttpHeaders();
-
-    return this.http.post<any>(endpoints.add.postFiles, formData, {headers});
-  }
 
   createFolder(folderName: string): Observable<string> {
     const params = new HttpParams().set('folderName', folderName);
 
-    return this.http.post<string>(endpoints.add.createFolder, {}, {params});
+    return this.http.post<string>(endpoints.add.createFolder, {}, { params });
   }
-
-  
 }

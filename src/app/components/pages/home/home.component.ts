@@ -17,7 +17,7 @@ import { Title } from '@angular/platform-browser';
 })
 
 export class HomeComponent implements OnInit {
-[x: string]: any;
+  [x: string]: any;
 
   isNavbarCollapse = true;
   folders: FolderModel[] = [];
@@ -31,7 +31,6 @@ export class HomeComponent implements OnInit {
     this.title.setTitle('Home Cloud');
   }
 
-  // Load files
   loadFiles(path: string = '') {
     this.service.getFiles(path).subscribe(
       data => {

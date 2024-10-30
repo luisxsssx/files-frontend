@@ -3,6 +3,7 @@
   class="btn"
   data-bs-toggle="modal"
   data-bs-target="#modalFile"
+  id="liveToastBtn"
 >
   <img src="add-file.svg" class="svg2" />
 </button>
@@ -27,11 +28,6 @@
           (change)="onFileSelected($event)"
         />
       </div>
-      <div *ngIf="fileModel">
-        <p>File Name: {{ fileModel.name }}</p>
-        <p>File Size: {{ fileModel.size }}</p>
-        <p>Creation Date: {{ fileModel.creationDate | date : "short" }}</p>
-      </div>
       <div class="modal-footer">
         <button type="button" class="btn" data-bs-dismiss="modal">
           Cancel
@@ -41,5 +37,30 @@
         </button>
       </div>
     </div>
+  </div>
+</div>
+
+<div
+  class="toast-container position-fixed bottom-0 end-0 p-3"
+  *ngIf="onFileUploaded"
+>
+  <div
+    id="liveToast"
+    class="toast show"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
+    <div class="toast-header">
+      <strong class="me-auto">Home Cloud</strong>
+      <small>Just now</small>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="toast"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="toast-body">File uploaded successfully</div>
   </div>
 </div>
