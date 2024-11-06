@@ -40,16 +40,13 @@ export class AddElementComponent implements OnInit, OnDestroy {
       this.fileService.uploadFile(this.selectedFile).subscribe({
         next: (response) => {
           console.log('File uploaded successfully!', response);
-          this.resetForm();
-          this.onFileUploaded = false;
           this.fileService.notifyContentChanged();
-          setTimeout(() => {
-            this.onFileUploaded = true;
-          }, 4000);
+          this.resetForm();
+          this.alertService.showSuccessAlert();
         },
         error: (error) => {
           console.error('Error uploading file:', error);
-          this.warning();
+          this.alertService.showWarningAlert();
         }
       });
     }
@@ -58,6 +55,10 @@ export class AddElementComponent implements OnInit, OnDestroy {
   resetForm() {
     this.selectedFile = undefined;
     this.fileModel = { name: '', size: '', creationDate: new Date() };
+    const inputFile: HTMLInputElement | null = document.querySelector('input[type="file"]');
+    if (inputFile) {
+      inputFile.value = '';
+    }
   }
 
   warning() {

@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ApiService } from '../../../services/api.service';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { AlertService } from '../../../services/alert.service';
 import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
+import { FilesService } from '../../../services/files.service';
 
 @Component({
   selector: 'app-add-folder',
@@ -17,7 +18,7 @@ export class AddFolderComponent implements OnInit, OnDestroy {
   onFolderCreate: boolean = false;
   showForm: boolean = false;
 
-  constructor(private service: ApiService, private alertService: AlertService, private router: Router) { }
+  constructor(private service: ApiService, private alertService: AlertService, private router: Router, private fileService: FilesService) { }
 
   ngOnInit(): void { }
   ngOnDestroy(): void { }
@@ -30,14 +31,15 @@ export class AddFolderComponent implements OnInit, OnDestroy {
             console.log('Folder created successfully', respose);
             this.showForm = false;
           })
-          this.onFolderCreate = true;
           this.showForm = false;
           this.router.navigateByUrl('my-unit', { skipLocationChange: true })
           this.resetForm();
-          setTimeout(() => this.onFolderCreate = false, 4000)
+          this.alertService.showSuccesFolderAlert();
+          this.fileService.notifyContentChanged();
         },
         error: (error) => {
           console.error('Error creating folder', error);
+          this.alertService.showWarningFodlerAlert();
         },
       });
     } else {

@@ -13,11 +13,12 @@ import { FilterPipe } from "../../../pipes/filter.pipe";
 import { AlertComponent } from "../../notification/alert/alert.component";
 import { Subscription } from 'rxjs';
 import { FilesService } from '../../../services/files.service';
+import { ToastsComponent } from "../../notification/toasts/toasts.component";
 
 @Component({
   selector: 'app-my-unit',
   standalone: true,
-  imports: [MatIconModule, NgFor, NgIf, SidebarComponent, AddElementComponent, CommonModule, AddFolderComponent, FormsModule, FilterPipe, AlertComponent],
+  imports: [MatIconModule, NgFor, NgIf, SidebarComponent, AddElementComponent, CommonModule, AddFolderComponent, FormsModule, FilterPipe, AlertComponent, ToastsComponent],
   templateUrl: './my-unit.component.html',
   styleUrls: ['./my-unit.component.css']
 })
@@ -50,7 +51,7 @@ export class MyUnitComponent implements OnInit, OnDestroy {
     this.items = [];
     this.hasData = true;
 
-    // Obtener carpetas
+    // Get folders
     this.service.getFolders(path).subscribe(
       (foldersData: FolderModel[]) => {
         if (foldersData.length > 0) {
@@ -65,7 +66,7 @@ export class MyUnitComponent implements OnInit, OnDestroy {
       }
     );
 
-    // Obtener archivos
+    // Get files
     this.service.getFiles(path).subscribe(
       (filesData: FileModel[]) => {
         if (filesData.length > 0) {

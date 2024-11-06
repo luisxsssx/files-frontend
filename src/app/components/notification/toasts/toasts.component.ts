@@ -11,6 +11,7 @@ import { AlertService } from '../../../services/alert.service';
 })
 export class ToastsComponent implements OnInit {
   fileUploaded: boolean = false;
+  folderUploaded: boolean = false;
 
   constructor(private alertService: AlertService) { }
 
@@ -18,6 +19,11 @@ export class ToastsComponent implements OnInit {
     this.alertService.successAlert$.subscribe(() => {
       this.fileUploaded = true;
       setTimeout(() => this.fileUploaded = false, 3000);
+    });
+
+    this.alertService.successAlert$.subscribe(() => {
+      this.folderUploaded = true;
+      setTimeout(() => this.folderUploaded = false, 3000);
     });
   }
 

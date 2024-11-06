@@ -19,4 +19,13 @@ export class AlertService {
   showWarningAlert() {
     this.warningAlertSource.next(true);
   }
+
+  showSuccesFolderAlert() {
+    this.successAlertSource.next(true);
+  }
+
+  showWarningFodlerAlert() {
+    this.warningAlertSource.next(true);
+  }
+
 }

@@ -1,4 +1,7 @@
-<div class="toast-container position-fixed bottom-0 end-0 p-3">
+<div
+  *ngIf="fileUploaded"
+  class="toast-container position-fixed bottom-0 end-0 p-3"
+>
   <div
     id="liveToast"
     class="toast show"
@@ -20,7 +23,10 @@
   </div>
 </div>
 
-<div class="toast-container position-fixed bottom-0 end-0 p-3">
+<div
+  *ngIf="folderUploaded"
+  class="toast-container position-fixed bottom-0 end-0 p-3"
+>
   <div
     id="liveToast"
     class="toast show"
@@ -38,6 +44,6 @@
         aria-label="Close"
       ></button>
     </div>
-    <div class="toast-body">File not selected</div>
+    <div class="toast-body">Folder uploaded successfully</div>
   </div>
 </div>
