@@ -1,32 +1,48 @@
-<ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">
+<ul
+  class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+>
   <li>
-    <a class="navbar-brand d-flex align-items-center rounded-4" [routerLink]="['']">
+    <a
+      class="navbar-brand d-flex align-items-center rounded-4"
+      [routerLink]="['']"
+    >
       <img src="house.svg" class="svg3 me-2" />
       <span class="navbar-text">HomePage</span>
     </a>
   </li>
   <li>
-    <a class="navbar-brand d-flex align-items-center rounded-4" [attr.aria-expanded]="!isNavbarCollapse"
-      [routerLink]="['/my-unit']">
+    <a
+      class="navbar-brand d-flex align-items-center rounded-4"
+      [attr.aria-expanded]="!isNavbarCollapse"
+      [routerLink]="['/my-unit']"
+    >
       <img src="disk.svg" class="svg3 me-2" (click)="toggleSidebar()" />
-      <span class="navbar-text" >My unit</span>
+      <span class="navbar-text">My unit</span>
     </a>
-    <div [ngClass]="{
+    <div
+      [ngClass]="{
         collapse: isNavbarCollapse,
         'navbar-collapse': true
-      }" class="container-md">
+      }"
+      class="container-md"
+    >
       <ul class="nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
         <li class="w-100" *ngFor="let folder of folders">
           <a class="navbar-brand d-flex align-items-center rounded-4">
             <img src="folder.svg" class="svg3 me-2" />
-            <span class="navbar-text" [routerLink]="['/content']">{{ folder.name }}</span>
+            <span class="navbar-text" [routerLink]="['/folder', folder.name]">{{
+              folder.name
+            }}</span>
           </a>
         </li>
       </ul>
     </div>
   </li>
   <li>
-    <a class="navbar-brand d-flex align-items-center rounded-4" [routerLink]="['/paperbin']">
+    <a
+      class="navbar-brand d-flex align-items-center rounded-4"
+      [routerLink]="['/paperbin']"
+    >
       <img src="trash.svg" class="svg3 me-2" />
       <span class="navbar-text">Paper bin</span>
     </a>

@@ -8,8 +8,14 @@ import { FileModel, FolderModel } from '../../models/file';
   providedIn: 'root',
 })
 export class ApiService {
+  private contentChangedSubject = new Subject<void>();
+  contentChanged$ = this.contentChangedSubject.asObservable();
 
   constructor(private http: HttpClient) { }
+
+  notifyContentChanged(): void {
+    this.contentChangedSubject.next();
+  }
 
   getBaseFolderContent(): Observable<FileModel[]> {
     return this.http.get<FileModel[]>(endpoints.content.getContent);
@@ -77,11 +83,26 @@ export class ApiService {
     );
   }
 
-
-
   createFolder(folderName: string): Observable<string> {
     const params = new HttpParams().set('folderName', folderName);
 
-    return this.http.post<string>(endpoints.add.createFolder, {}, { params });
+    return this.http.post<string>(endpoints.add.createFolder, {}, { params }).pipe(
+      tap(() => this.notifyContentChanged())
+    );
+  }
+
+  uploadFile(file: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('file', file, file.name);
+
+    const headers = new HttpHeaders();
+
+    return this.http.post<any>(endpoints.add.postFiles, formData, { headers }).pipe(
+      tap(() => this.notifyContentChanged()),
+      catchError(error => {
+        console.error('Error uploading file:', error);
+        return of(null);
+      })
+    );
   }
 }

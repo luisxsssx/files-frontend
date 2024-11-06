@@ -50,29 +50,48 @@ export class MyUnitComponent implements OnInit, OnDestroy {
     this.items = [];
     this.hasData = true;
 
+    // Obtener carpetas
     this.service.getFolders(path).subscribe(
-      foldersData => {
-        this.items.push(...foldersData);
+      (foldersData: FolderModel[]) => {
+        if (foldersData.length > 0) {
+          this.items.push(...foldersData);
+        }
         console.log('Folders:', foldersData);
         this.checkIfNoData();
       },
       error => {
         console.error('Error getting folders:', error);
+        this.checkIfNoData();
       }
     );
 
+    // Obtener archivos
     this.service.getFiles(path).subscribe(
-      filesData => {
-        this.items.push(...filesData);
+      (filesData: FileModel[]) => {
+        if (filesData.length > 0) {
+          this.items.push(...filesData);
+        }
         console.log('Files:', filesData);
         this.checkIfNoData();
       },
       error => {
         console.error('Error getting files:', error);
+        this.checkIfNoData();
       }
     );
 
     this.show = 'files';
+  }
+
+  removeDuplicates(): void {
+    const seen = new Set();
+    this.items = this.items.filter(item => {
+      if (seen.has(item.name)) {
+        return false;
+      }
+      seen.add(item.name);
+      return true;
+    });
   }
 
   onSelectFile(folderName: string): void {
@@ -81,11 +100,16 @@ export class MyUnitComponent implements OnInit, OnDestroy {
   }
 
   checkIfNoData(): void {
+    this.removeDuplicates();
     this.hasData = this.items.length > 0;
   }
 
   sortByDate(): void {
-    this.items.sort((a, b) => b.creationDate.getTime() - a.creationDate.getTime());
+    this.items.sort((a, b) => {
+      const dateA = 'creationDate' in a ? new Date(a.creationDate).getTime() : 0;
+      const dateB = 'creationDate' in b ? new Date(b.creationDate).getTime() : 0;
+      return dateB - dateA;
+    });
   }
 
   sortByName(): void {
