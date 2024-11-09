@@ -59,9 +59,7 @@
                       src="folder.svg"
                       class="svg me-2"
                     />
-                    <span (click)="onSelectFile(item.name)">{{
-                      item.name
-                    }}</span>
+                    <span (click)="onSelectFile(item)">{{ item.name }}</span>
                   </td>
                   <td>{{ item.creationDate | date : "mediumDate" }}</td>
                   <td>{{ itemHasSize(item) ? item.size : "-" }}</td>

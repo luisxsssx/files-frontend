@@ -39,13 +39,11 @@ export class AddElementComponent implements OnInit, OnDestroy {
     if (this.selectedFile) {
       this.fileService.uploadFile(this.selectedFile).subscribe({
         next: (response) => {
-          console.log('File uploaded successfully!', response);
           this.fileService.notifyContentChanged();
           this.resetForm();
           this.alertService.showSuccessAlert();
         },
         error: (error) => {
-          console.error('Error uploading file:', error);
           this.alertService.showWarningAlert();
         }
       });

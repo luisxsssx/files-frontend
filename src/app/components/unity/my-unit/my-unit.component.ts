@@ -57,7 +57,6 @@ export class MyUnitComponent implements OnInit, OnDestroy {
         if (foldersData.length > 0) {
           this.items.push(...foldersData);
         }
-        console.log('Folders:', foldersData);
         this.checkIfNoData();
       },
       error => {
@@ -72,7 +71,6 @@ export class MyUnitComponent implements OnInit, OnDestroy {
         if (filesData.length > 0) {
           this.items.push(...filesData);
         }
-        console.log('Files:', filesData);
         this.checkIfNoData();
       },
       error => {
@@ -95,10 +93,15 @@ export class MyUnitComponent implements OnInit, OnDestroy {
     });
   }
 
-  onSelectFile(folderName: string): void {
-    console.log('Navegando a la carpeta:', folderName);
-    this.router.navigate(['/folder', encodeURIComponent(folderName)]);
+  onSelectFile(item: FileModel | FolderModel): void {
+    if ('size' in item) {
+      console.log('Este es un archivo, no se puede navegar:', item.name);
+    } else {
+      console.log('Navegando a la carpeta:', item.name);
+      this.router.navigate(['/folder', encodeURIComponent(item.name)]);
+    }
   }
+
 
   checkIfNoData(): void {
     this.removeDuplicates();
