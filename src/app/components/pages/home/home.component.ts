@@ -11,7 +11,7 @@ import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor, MatIconModule, NgClass, UnitComponent, SidebarComponent],
+  imports: [MatIconModule, UnitComponent, SidebarComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

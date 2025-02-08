@@ -5,7 +5,7 @@ import { AlertService } from '../../../services/alert.service';
 @Component({
   selector: 'app-alert',
   standalone: true,
-  imports: [NgIf],
+  imports: [],
   templateUrl: './alert.component.html',
   styleUrl: './alert.component.css'
 })

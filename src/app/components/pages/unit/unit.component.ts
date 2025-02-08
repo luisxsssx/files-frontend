@@ -11,7 +11,7 @@ import { error } from 'console';
 @Component({
   selector: 'app-unit',
   standalone: true,
-  imports: [MatIconModule, NgFor, NgClass, NgIf, FilterPipe, FormsModule, CommonModule],
+  imports: [MatIconModule, NgFor, NgIf, FilterPipe, FormsModule, CommonModule],
   templateUrl: './unit.component.html',
   styleUrl: './unit.component.css'
 })
@@ -23,7 +23,7 @@ export class UnitComponent implements OnInit {
   isActive = false;
   content: string[] = [];
   errorMessage: string = '';
-  
+
   constructor(private service: ApiService, private router: Router) { }
 
   ngOnInit(): void {
@@ -38,7 +38,7 @@ export class UnitComponent implements OnInit {
     this.service.getAllContent('file').subscribe({
       next: (data: (FileModel | FolderModel)[]) => {
         this.items = data.filter((item): item is FileModel => 'size' in item);
-        this.show = 'files'; 
+        this.show = 'files';
         console.log('Files', this.items)
         this.sortByDate();
       },
@@ -52,7 +52,7 @@ export class UnitComponent implements OnInit {
     this.service.getAllContent('folder').subscribe({
       next: (data: (FileModel | FolderModel)[]) => {
         this.items = data.filter((item): item is FolderModel => !('size' in item));
-        this.show = 'folder';  
+        this.show = 'folder';
         this.sortByDate();
       },
       error: (error) => {
@@ -60,8 +60,8 @@ export class UnitComponent implements OnInit {
       }
     });
   }
-  
+
   sortByDate() {
-    this.items.sort((a, b) => b.creationDate.getTime()- a.creationDate.getTime());
+    this.items.sort((a, b) => b.creationDate.getTime() - a.creationDate.getTime());
   }
 }
