@@ -1,9 +1,7 @@
 <div class="container-fluid no-selected">
   <div class="row flex-nowrap">
     <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 color">
-      <div
-        class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100"
-      >
+      <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100">
         <app-sidebar />
       </div>
     </div>
@@ -12,14 +10,8 @@
       <nav class="container-lg w-50 p-3">
         <div class="container-fluid">
           <form class="d-flex" role="search">
-            <input
-              [(ngModel)]="searchContent"
-              class="form-control me-2 rounded-pill"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              name="searchContent"
-            />
+            <input [(ngModel)]="searchContent" class="form-control me-2 rounded-pill" type="search" placeholder="Search"
+              aria-label="Search" name="searchContent" />
           </form>
         </div>
       </nav>
@@ -44,21 +36,10 @@
                 </tr>
               </thead>
               <tbody>
-                <tr
-                  *ngFor="let item of items | filter : searchContent"
-                  class="hover-column"
-                >
+                <tr *ngFor="let item of items | filter : searchContent" class="hover-column">
                   <td class="navbar-brand d-flex align-items-center">
-                    <img
-                      *ngIf="itemHasSize(item)"
-                      src="files.svg"
-                      class="svg me-2"
-                    />
-                    <img
-                      *ngIf="!itemHasSize(item)"
-                      src="folder.svg"
-                      class="svg me-2"
-                    />
+                    <img *ngIf="itemHasSize(item)" src="files.svg" class="svg me-2" />
+                    <img *ngIf="!itemHasSize(item)" src="folder.svg" class="svg me-2" />
                     <span (click)="onSelectFile(item)">{{ item.name }}</span>
                   </td>
                   <td>{{ item.creationDate | date : "mediumDate" }}</td>
@@ -66,7 +47,7 @@
                   <td>
                     <img src="download.svg" class="svg me-1 icon" />
                     <img src="rename.svg" class="svg me-1 icon" />
-                    <img src="trash.svg" class="svg icon" />
+                    <img src="trash.svg" class="svg icon" (click)="deleteItem(item.name)" title="delete" />
                   </td>
                 </tr>
               </tbody>

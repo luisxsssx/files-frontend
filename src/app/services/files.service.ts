@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, Observable, of, Subject, tap } from 'rxjs';
 import { endpoints } from '../../models/api';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -31,4 +31,17 @@ export class FilesService {
       })
     );
   }
+
+  deleteItem(path: string): Observable<any> {
+    const url = endpoints.delete.deleteItem(path);
+    return this.http.delete<any>(url).pipe(
+      tap(() => this.notifyContentChanged()),
+      catchError(error => {
+        console.error('Error deleting item:', error);
+        return of(null);
+      })
+    );
+  }
+
+
 }

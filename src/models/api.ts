@@ -12,5 +12,8 @@ export const endpoints = {
     add: {
         postFiles: `${URL_BASE}/upload`,
         createFolder: `${URL_BASE}/folder/create`
+    },
+    delete: {
+        deleteItem: (path: string) => `${URL_BASE}/delete?path=${encodeURIComponent(path)}`
     }
 }

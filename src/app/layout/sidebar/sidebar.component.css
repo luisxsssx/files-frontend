@@ -23,6 +23,10 @@ a {
     width: 22vh;
 }
 
+span {
+    cursor: pointer;
+}
+
 a:hover {
     background-color: #8ecae6;
 }

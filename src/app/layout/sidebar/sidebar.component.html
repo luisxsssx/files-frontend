@@ -11,7 +11,7 @@
   <li>
     <div class="navbar-brand d-flex align-items-center rounded-4 cursor-pointer" (click)="toggleSidebar()">
       <img src="disk.svg" class="svg3 me-2" />
-      <span class="navbar-text">My unit</span>
+      <span class="navbar-text" [routerLink]="['/my-unit']">My unit</span>
       <mat-icon class="ms-auto">
         {{ isNavbarCollapse ? 'chevron_right' : 'chevron_down' }}
       </mat-icon>

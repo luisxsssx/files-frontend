@@ -14,11 +14,14 @@ import { AlertComponent } from "../../notification/alert/alert.component";
 import { Subscription } from 'rxjs';
 import { FilesService } from '../../../services/files.service';
 import { ToastsComponent } from "../../notification/toasts/toasts.component";
+import { error } from 'node:console';
+import { response } from 'express';
+import { AlertService } from '../../../services/alert.service';
 
 @Component({
   selector: 'app-my-unit',
   standalone: true,
-  imports: [MatIconModule, NgFor, NgIf, SidebarComponent, AddElementComponent, CommonModule, AddFolderComponent, FormsModule, FilterPipe, AlertComponent, ToastsComponent],
+  imports: [MatIconModule, NgFor, NgIf, SidebarComponent, AddElementComponent, CommonModule, AddFolderComponent, FormsModule, FilterPipe, ToastsComponent],
   templateUrl: './my-unit.component.html',
   styleUrls: ['./my-unit.component.css']
 })
@@ -29,10 +32,16 @@ export class MyUnitComponent implements OnInit, OnDestroy {
   isRowCollapse = true;
   searchContent = '';
   hasData: boolean = true;
+  showDeleted: boolean = false;
 
   private contentChangedSubscription!: Subscription;
 
-  constructor(private service: ApiService, private router: Router, private title: Title, private fileService: FilesService) { }
+  constructor(
+    private service: ApiService,
+    private router: Router,
+    private title: Title,
+    private fileService: FilesService,
+    private aleterService: AlertService,) { }
 
   ngOnInit(): void {
     this.title.setTitle('My unit - Home Cloud');
@@ -102,6 +111,16 @@ export class MyUnitComponent implements OnInit, OnDestroy {
     }
   }
 
+  deleteItem(path: string): void {
+    if (path) {
+      this.fileService.deleteItem(path).subscribe({
+        next: (response) => {
+          console.log('Item deleted:', response);
+        }
+
+      })
+    }
+  }
 
   checkIfNoData(): void {
     this.removeDuplicates();

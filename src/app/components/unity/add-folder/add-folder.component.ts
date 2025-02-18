@@ -3,13 +3,12 @@ import { ApiService } from '../../../services/api.service';
 import { FormsModule } from '@angular/forms';
 import { AlertService } from '../../../services/alert.service';
 import { Router } from '@angular/router';
-import { NgIf } from '@angular/common';
 import { FilesService } from '../../../services/files.service';
 
 @Component({
   selector: 'app-add-folder',
   standalone: true,
-  imports: [FormsModule, NgIf],
+  imports: [FormsModule],
   templateUrl: './add-folder.component.html',
   styleUrl: './add-folder.component.css',
 })
@@ -18,7 +17,11 @@ export class AddFolderComponent implements OnInit, OnDestroy {
   onFolderCreate: boolean = false;
   showForm: boolean = false;
 
-  constructor(private service: ApiService, private alertService: AlertService, private router: Router, private fileService: FilesService) { }
+  constructor(
+    private service: ApiService,
+    private alertService: AlertService,
+    private router: Router,
+    private fileService: FilesService) { }
 
   ngOnInit(): void { }
   ngOnDestroy(): void { }

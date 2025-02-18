@@ -8,6 +8,7 @@ export class AlertService {
 
   private successAlertSource = new Subject<boolean>();
   private warningAlertSource = new Subject<boolean>();
+  private successDelete = new Subject<boolean>();
 
   successAlert$ = this.successAlertSource.asObservable();
   warningAlert$ = this.warningAlertSource.asObservable();
@@ -26,6 +27,10 @@ export class AlertService {
 
   showWarningFodlerAlert() {
     this.warningAlertSource.next(true);
+  }
+
+  showDeleted() {
+    this.successDelete.next(true);
   }
 
 }
